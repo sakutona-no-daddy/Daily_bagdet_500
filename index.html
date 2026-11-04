@@ -37,12 +37,17 @@
       width: 100%;
       max-width: 440px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      gap: 10px;
       margin-bottom: 16px;
     }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     .date-badge {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
       background: #e2e8f0;
       padding: 6px 14px;
@@ -51,7 +56,9 @@
     }
     .sim-buttons {
       display: flex;
+      flex-wrap: wrap;
       gap: 6px;
+      justify-content: flex-end;
     }
     .text-btn {
       background: #fff;
@@ -62,6 +69,16 @@
       font-weight: 600;
       color: var(--subtext);
       cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .text-btn:active {
+      background: #f1f5f9;
+    }
+    .btn-today {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: var(--primary-dark);
+      font-weight: 700;
     }
     .balance-card {
       background: var(--card);
@@ -342,10 +359,14 @@
 <body>
 
   <div class="header">
-    <div id="displayDate" class="date-badge"></div>
+    <div class="header-top">
+      <div id="displayDate" class="date-badge"></div>
+      <button class="text-btn" id="resetBtn">全データ消去</button>
+    </div>
     <div class="sim-buttons">
-      <button class="text-btn" id="nextDayBtn">翌日へ (+1日)</button>
-      <button class="text-btn" id="resetBtn">リセット</button>
+      <button class="text-btn" id="prevDayBtn">-1日 (前日)</button>
+      <button class="text-btn" id="nextDayBtn">+1日 (翌日)</button>
+      <button class="text-btn btn-today" id="todayBtn">今日に戻す</button>
     </div>
   </div>
 
@@ -572,8 +593,22 @@
       renderUI();
     };
 
+    document.getElementById('prevDayBtn').onclick = () => {
+      const data = loadData();
+      data.dayOffset = (data.dayOffset || 0) - 1;
+      saveData(data);
+      renderUI();
+    };
+
+    document.getElementById('todayBtn').onclick = () => {
+      const data = loadData();
+      data.dayOffset = 0;
+      saveData(data);
+      renderUI();
+    };
+
     document.getElementById('resetBtn').onclick = () => {
-      if (confirm('データをすべてリセットして、今日を「1日目（残高500円）」に戻しますか？')) {
+      if (confirm('記録した出費データをすべて消去して、今日を「1日目（残高500円）」に戻しますか？')) {
         localStorage.removeItem(STORAGE_KEY);
         loadData();
         renderUI();
