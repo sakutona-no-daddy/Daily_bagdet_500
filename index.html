@@ -78,8 +78,6 @@
       color: var(--primary-dark);
       font-weight: 700;
     }
-
-    /* 勤務状態切り替えバナー */
     .work-status-card {
       width: 100%;
       max-width: 440px;
@@ -113,7 +111,6 @@
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
     }
     .work-toggle-btn.btn-is-working {
       background: #ecfdf5;
@@ -125,7 +122,6 @@
       color: var(--subtext);
       border: 1px solid var(--border);
     }
-
     .balance-card {
       background: var(--card);
       width: 100%;
@@ -148,3 +144,580 @@
       font-weight: 900;
       line-height: 1.1;
       letter-spacing: -1.5px;
+      color: var(--primary);
+      word-break: break-all;
+    }
+    .balance-amount.negative {
+      color: var(--danger);
+    }
+    .balance-status {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 12px;
+      background: #ecfdf5;
+      color: var(--primary-dark);
+    }
+    .balance-status.negative {
+      background: #fef2f2;
+      color: var(--danger);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+      max-width: 440px;
+      margin-bottom: 14px;
+    }
+    .stat-box {
+      background: var(--card);
+      padding: 10px 6px;
+      border-radius: 14px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .stat-title {
+      font-size: 11px;
+      color: var(--subtext);
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .history-card {
+      background: var(--card);
+      width: 100%;
+      max-width: 440px;
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border);
+      flex: 1;
+    }
+    .history-header {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .history-list {
+      list-style: none;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+    }
+    .history-item:last-child {
+      border-bottom: none;
+    }
+    .history-item-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .item-memo {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .item-date {
+      font-size: 11px;
+      color: var(--subtext);
+    }
+    .item-amount-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .item-amount {
+      font-weight: 700;
+      color: #334155;
+    }
+    .history-item-del {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+    .empty-state {
+      text-align: center;
+      color: var(--subtext);
+      font-size: 13px;
+      padding: 24px 0;
+    }
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+    }
+    .open-modal-btn {
+      width: 100%;
+      max-width: 440px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+    }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      z-index: 20;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-sheet {
+      background: #fff;
+      width: 100%;
+      max-width: 460px;
+      border-radius: 28px 28px 0 0;
+      padding: 24px 20px 40px;
+      animation: slideUp 0.22s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: var(--subtext);
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--subtext);
+      margin-bottom: 6px;
+    }
+    .input-field {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      outline: none;
+    }
+    .submit-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-top">
+      <div id="displayDate" class="date-badge"></div>
+      <button class="text-btn" id="resetBtn">全データ消去</button>
+    </div>
+    <div class="sim-buttons">
+      <button class="text-btn" id="prevDayBtn">-1日</button>
+      <button class="text-btn" id="nextDayBtn">+1日</button>
+      <button class="text-btn btn-today" id="todayBtn">今日に戻す</button>
+    </div>
+  </div>
+
+  <div class="work-status-card">
+    <div class="status-left">
+      <span class="day-type-badge" id="dayTypeBadge">カレンダー判定</span>
+      <span class="day-type-name" id="dayTypeName">平日</span>
+    </div>
+    <button class="work-toggle-btn" id="workToggleBtn">出勤 (+500円)</button>
+  </div>
+
+  <div class="balance-card">
+    <div class="balance-label">現在のお小遣い残高</div>
+    <div id="balanceDisplay" class="balance-amount">500円</div>
+    <div id="balanceStatus" class="balance-status">貯蓄中 (プラス)</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-box">
+      <div class="stat-title">出勤日数</div>
+      <div class="stat-value" id="daysCount">1日</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-title">累計予算</div>
+      <div class="stat-value" id="totalBudget">500円</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-title">累計出費</div>
+      <div class="stat-value" id="totalExpense">0円</div>
+    </div>
+  </div>
+
+  <div class="history-card">
+    <div class="history-header">
+      <span>支出の履歴</span>
+      <span id="todayExpenseLabel" style="font-size: 13px; color: var(--subtext);">今日: 0円</span>
+    </div>
+    <ul id="historyList" class="history-list">
+      <li class="empty-state">まだ出費の記録はありません</li>
+    </ul>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="open-modal-btn" id="openModalBtn">使った金額を入力</button>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3>使った金額を記録</h3>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">使った金額 (円)</label>
+        <input type="number" id="spendAmount" class="input-field" placeholder="150" inputmode="numeric">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">メモ (任意)</label>
+        <input type="text" id="spendMemo" class="input-field" placeholder="カフェ、昼食 など" style="font-size: 15px; font-weight: normal;">
+      </div>
+
+      <button id="submitSpendBtn" class="submit-btn">この金額を引く</button>
+    </div>
+  </div>
+
+  <script>
+    const DAILY_BUDGET = 500;
+    const STORAGE_KEY = 'daily_allowance_workday_v5';
+
+    function getJapaneseHolidayName(d) {
+      const year = d.getFullYear();
+      const month = d.getMonth() + 1;
+      const day = d.getDate();
+      const dow = d.getDay();
+      const nthWeek = Math.floor((day - 1) / 7) + 1;
+
+      const vernal = Math.floor(20.8431 + 0.242194 * (year - 1980) - Math.floor((year - 1980) / 4));
+      const autumn = Math.floor(23.2488 + 0.242194 * (year - 1980) - Math.floor((year - 1980) / 4));
+
+      if (month === 1 && day === 1) return '元日';
+      if (month === 1 && nthWeek === 2 && dow === 1) return '成人の日';
+      if (month === 2 && day === 11) return '建国記念の日';
+      if (month === 2 && day === 23) return '天皇誕生日';
+      if (month === 3 && day === vernal) return '春分の日';
+      if (month === 4 && day === 29) return '昭和の日';
+      if (month === 5 && day === 3) return '憲法記念日';
+      if (month === 5 && day === 4) return 'みどりの日';
+      if (month === 5 && day === 5) return 'こどもの日';
+      if (month === 7 && nthWeek === 3 && dow === 1) return '海の日';
+      if (month === 8 && day === 11) return '山の日';
+      if (month === 9 && nthWeek === 3 && dow === 1) return '敬老の日';
+      if (month === 9 && day === autumn) return '秋分の日';
+      if (month === 10 && nthWeek === 2 && dow === 1) return 'スポーツの日';
+      if (month === 11 && day === 3) return '文化の日';
+      if (month === 11 && day === 23) return '勤労感謝の日';
+
+      const yesterday = new Date(d);
+      yesterday.setDate(yesterday.getDate() - 1);
+      if (dow === 1 && getJapaneseHolidayName(yesterday)) {
+        return '振替休日';
+      }
+      return null;
+    }
+
+    function isDefaultWorkDay(d) {
+      const dow = d.getDay();
+      if (dow === 0 || dow === 6) return false;
+      if (getJapaneseHolidayName(d)) return false;
+      return true;
+    }
+
+    function getTodayStr(d) {
+      const target = d || new Date();
+      const year = target.getFullYear();
+      const month = String(target.getMonth() + 1).padStart(2, '0');
+      const day = String(target.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function loadData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {}
+      }
+      const today = getTodayStr();
+      const init = {
+        startDate: today,
+        dayOffset: 0,
+        workDayOverrides: {},
+        expenses: []
+      };
+      saveData(init);
+      return init;
+    }
+
+    function saveData(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function getCurrentDate(data) {
+      const d = new Date();
+      d.setDate(d.getDate() + (data.dayOffset || 0));
+      return d;
+    }
+
+    function isWorkingDay(dateObj, overrides) {
+      const str = getTodayStr(dateObj);
+      if (overrides && overrides[str] !== undefined) {
+        return overrides[str];
+      }
+      return isDefaultWorkDay(dateObj);
+    }
+
+    function calculateStats(data) {
+      const start = new Date(data.startDate);
+      const current = getCurrentDate(data);
+
+      start.setHours(0,0,0,0);
+      current.setHours(0,0,0,0);
+
+      let workDaysCount = 0;
+      const curr = new Date(start);
+
+      while (curr <= current) {
+        if (isWorkingDay(curr, data.workDayOverrides)) {
+          workDaysCount++;
+        }
+        curr.setDate(curr.getDate() + 1);
+      }
+
+      const totalBudget = workDaysCount * DAILY_BUDGET;
+      const totalExpense = data.expenses.reduce((sum, item) => sum + item.amount, 0);
+      const balance = totalBudget - totalExpense;
+
+      const todayStr = getTodayStr(current);
+      const todayExpense = data.expenses
+        .filter(item => item.dateStr === todayStr)
+        .reduce((sum, item) => sum + item.amount, 0);
+
+      const holidayName = getJapaneseHolidayName(current);
+      const dayOfWeekStr = ['日', '月', '火', '水', '木', '金', '土'][current.getDay()];
+
+      return {
+        workDaysCount,
+        totalBudget,
+        totalExpense,
+        balance,
+        todayExpense,
+        todayStr,
+        dayOfWeekStr,
+        holidayName,
+        current
+      };
+    }
+
+    function renderUI() {
+      const data = loadData();
+      const stats = calculateStats(data);
+      const isWorking = isWorkingDay(stats.current, data.workDayOverrides);
+
+      document.getElementById('displayDate').textContent = `${stats.todayStr.replace(/-/g, '/')} (${stats.dayOfWeekStr})`;
+
+      const dayTypeNameEl = document.getElementById('dayTypeName');
+      const dayTypeBadgeEl = document.getElementById('dayTypeBadge');
+      const toggleBtn = document.getElementById('workToggleBtn');
+
+      let defaultStatusText = '平日';
+      if (stats.holidayName) defaultStatusText = `祝日 (${stats.holidayName})`;
+      else if (stats.dayOfWeekStr === '土' || stats.dayOfWeekStr === '日') defaultStatusText = `${stats.dayOfWeekStr}曜日 (休日)`;
+
+      dayTypeBadgeEl.textContent = `カレンダー: ${defaultStatusText}`;
+
+      if (isWorking) {
+        dayTypeNameEl.textContent = '💼 本日: 出勤日 (+500円)';
+        dayTypeNameEl.style.color = '#059669';
+        toggleBtn.textContent = '休みに変更する';
+        toggleBtn.className = 'work-toggle-btn btn-is-holiday';
+      } else {
+        dayTypeNameEl.textContent = '☕ 本日: 休日 (予算加算なし)';
+        dayTypeNameEl.style.color = '#64748b';
+        toggleBtn.textContent = '休日出勤にする (+500円)';
+        toggleBtn.className = 'work-toggle-btn btn-is-working';
+      }
+
+      document.getElementById('daysCount').textContent = `${stats.workDaysCount}日分`;
+      document.getElementById('totalBudget').textContent = `${stats.totalBudget.toLocaleString()}円`;
+      document.getElementById('totalExpense').textContent = `${stats.totalExpense.toLocaleString()}円`;
+      document.getElementById('todayExpenseLabel').textContent = `今日: ${stats.todayExpense.toLocaleString()}円`;
+
+      const balanceEl = document.getElementById('balanceDisplay');
+      const statusEl = document.getElementById('balanceStatus');
+      balanceEl.textContent = `${stats.balance.toLocaleString()}円`;
+
+      if (stats.balance < 0) {
+        balanceEl.classList.add('negative');
+        statusEl.classList.add('negative');
+        statusEl.textContent = `使いすぎ中 (赤字: ${Math.abs(stats.balance).toLocaleString()}円)`;
+      } else {
+        balanceEl.classList.remove('negative');
+        statusEl.classList.remove('negative');
+        statusEl.textContent = `貯蓄中 (余裕: +${stats.balance.toLocaleString()}円)`;
+      }
+
+      const listEl = document.getElementById('historyList');
+      if (data.expenses.length === 0) {
+        listEl.innerHTML = '<li class="empty-state">まだ出費の記録はありません</li>';
+      } else {
+        listEl.innerHTML = data.expenses.map((item, idx) => `
+          <li class="history-item">
+            <div class="history-item-left">
+              <span class="item-memo">${item.memo || '支出'}</span>
+              <span class="item-date">${item.dateStr.slice(5).replace('-', '/')} ${item.time || ''}</span>
+            </div>
+            <div class="item-amount-wrap">
+              <span class="item-amount">-${item.amount.toLocaleString()}円</span>
+              <button class="history-item-del" onclick="deleteItem(${idx})">&times;</button>
+            </div>
+          </li>
+        `).slice().reverse().join('');
+      }
+    }
+
+    document.getElementById('workToggleBtn').onclick = () => {
+      const data = loadData();
+      const current = getCurrentDate(data);
+      const dateStr = getTodayStr(current);
+      const currentStatus = isWorkingDay(current, data.workDayOverrides);
+
+      if (!data.workDayOverrides) data.workDayOverrides = {};
+      data.workDayOverrides[dateStr] = !currentStatus;
+
+      saveData(data);
+      renderUI();
+    };
+
+    function deleteItem(index) {
+      const data = loadData();
+      data.expenses.splice(index, 1);
+      saveData(data);
+      renderUI();
+    }
+
+    document.getElementById('openModalBtn').onclick = () => {
+      document.getElementById('spendAmount').value = '';
+      document.getElementById('spendMemo').value = '';
+      document.getElementById('modalOverlay').classList.add('active');
+      document.getElementById('spendAmount').focus();
+    };
+
+    document.getElementById('closeModalBtn').onclick = () => {
+      document.getElementById('modalOverlay').classList.remove('active');
+    };
+
+    document.getElementById('submitSpendBtn').onclick = () => {
+      const amtInput = document.getElementById('spendAmount');
+      const memoInput = document.getElementById('spendMemo');
+      const amt = parseInt(amtInput.value, 10);
+
+      if (isNaN(amt) || amt <= 0) {
+        alert('正しい金額を入力してください');
+        return;
+      }
+
+      const data = loadData();
+      const current = getCurrentDate(data);
+      const dateStr = getTodayStr(current);
+      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      data.expenses.push({
+        amount: amt,
+        memo: memoInput.value.trim(),
+        dateStr: dateStr,
+        time: timeStr
+      });
+
+      saveData(data);
+      document.getElementById('modalOverlay').classList.remove('active');
+      renderUI();
+    };
+
+    document.getElementById('nextDayBtn').onclick = () => {
+      const data = loadData();
+      data.dayOffset = (data.dayOffset || 0) + 1;
+      saveData(data);
+      renderUI();
+    };
+
+    document.getElementById('prevDayBtn').onclick = () => {
+      const data = loadData();
+      data.dayOffset = (data.dayOffset || 0) - 1;
+      saveData(data);
+      renderUI();
+    };
+
+    document.getElementById('todayBtn').onclick = () => {
+      const data = loadData();
+      data.dayOffset = 0;
+      saveData(data);
+      renderUI();
+    };
+
+    document.getElementById('resetBtn').onclick = () => {
+      if (confirm('記録した出費や設定データをすべて初期化しますか？')) {
+        localStorage.removeItem(STORAGE_KEY);
+        loadData();
+        renderUI();
+      }
+    };
+
+    window.onload = renderUI;
+  </script>
+</body>
+</html>
